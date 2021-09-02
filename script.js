@@ -39,7 +39,7 @@ searchBook();
 const showData = (books) => {
   //console.log(books);
 
-  // Error Handing
+  // Error Handling
   if (books.length === 0) {
     errorDiv.innerText = "NO Result Found";
   } else {
@@ -60,9 +60,9 @@ const showData = (books) => {
             />
             <div class="card-body text-center">
                     <h4>Book Name: ${book.title}</h4>
-                    <h5>Author Name: ${book.author_name}</h5>
-                    <h6>Publisher: ${book.publisher}</h6>
-                    <h5> <small class="text-muted">First Publish: ${book.first_publish_year}</small></h5>
+                    <h5>Author Name: ${book.author_name[0]}</h5>
+                    <h6>Publisher: ${book.publisher[0]}</h6>
+                    <h5> <small class="text-muted">First Published: ${book.first_publish_year}</small></h5>
         </div>`;
     bookDiv.innerHTML = bookCard;
 
