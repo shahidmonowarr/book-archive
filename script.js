@@ -24,6 +24,10 @@ const searchBook = () => {
       }, 1500);
     });
   searchInput.value = '';
+  ///
+  fetch(`https://openlibrary.org/search.json?q=${searchText}`)
+    .then(res => res.json())
+    .then(items => countSearch(items.numFound))
 }
 
 searchBook();
@@ -36,6 +40,8 @@ const showData = (books) => {
   } else {
     errorDiv.innerText = "";
   }
+
+  /*
   let totalarr = 0;
 
   // calculating total result 
@@ -46,6 +52,7 @@ const showData = (books) => {
   totalResult.innerHTML = `
   <h3>Total results founds: ${totalarr} </h3>
   `;
+  */
 
   //  loading particular book
   books.slice(0, 30).forEach((book) => {
@@ -80,5 +87,14 @@ const showData = (books) => {
     bookContainer.appendChild(div);
 
   });
+
+}
+
+const countSearch = (items) => {
+
+  console.log(items);
+  totalResult.innerHTML = `
+  <h3>Total results founds: ${items} </h3>
+  `;
 
 }
