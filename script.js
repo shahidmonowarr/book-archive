@@ -1,10 +1,18 @@
 const searchInput = document.getElementById("searchInput");
 const bookContainer = document.getElementById("book-container");
 const spinner = document.getElementById("spinner");
+const totalResult = document.getElementById("total-result");
+const errorDiv = document.getElementById("error");
+let totalarr = 0;
 const searchBook = () => {
   const searchText = searchInput.value;
 
+  // clearing previous data
   bookContainer.innerHTML = '';
+  totalResult.innerHTML = '';
+  errorDiv.innerText = "";
+
+  // showing spinner 
   spinner.classList.remove("d-none");
   fetch(`https://openlibrary.org/search.json?q=${searchText}`)
     .then((res) => res.json())
@@ -17,17 +25,36 @@ const searchBook = () => {
     });
   searchInput.value = '';
 }
+
 searchBook();
 const showData = (books) => {
-  console.log(books);
+  //console.log(books);
 
+  // Error Handing
+  if (books.length === 0) {
+    errorDiv.innerText = "NO Result Found";
+  } else {
+    errorDiv.innerText = "";
+  }
+  let totalarr = 0;
+
+  // calculating total result 
   books.forEach((book) => {
-    //console.log(book);
+    totalarr++;
+  })
+  console.log("total: ", totalarr);
+  totalResult.innerHTML = `
+  <h3>Total results founds: ${totalarr} </h3>
+  `;
+
+  //  loading particular book
+  books.slice(0, 30).forEach((book) => {
+
     const div = document.createElement("div");
     div.classList.add("col-md-3");
     div.innerHTML = `
       <!-- Image -->
-      <div class="rounded overflow-hidden border p-2">
+      <div class="rounded overflow-hidden bg-light p-2">
         <img
           src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg"
           class="w-100"
@@ -42,7 +69,7 @@ const showData = (books) => {
           justify-content-between
           align-items-center
           d-md-block
-          text-md-center
+          text-center bg-light 
         "
       >
         <h2>Book Name: ${book.title}</h2>
@@ -51,6 +78,7 @@ const showData = (books) => {
         <h4>First Publish: ${book.first_publish_year}</h4>
       `;
     bookContainer.appendChild(div);
+
   });
 
 }

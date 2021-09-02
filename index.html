@@ -17,10 +17,14 @@
         * {
             font-family: "Poppins", sans-serif;
         }
+
+        .container-body {
+            background-color: peachpuff;
+        }
     </style>
 </head>
 
-<body>
+<body class="container-body">
     <section class="container my-5">
         <!-- Input Box -->
         <div class="d-flex w-75 mx-auto">
@@ -29,16 +33,19 @@
         </div>
     </section>
     <section class="container mt-2">
-        <!-- <div id="error"></div> -->
+        <!-- error div  -->
+        <div id="error" class="text-center text-danger fs-1"></div>
 
         <!-- Spinner -->
-        <div class="text-center">
+        <div class="text-center mt-5">
             <div id="spinner" class="spinner-border d-none" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
+        <!-- total search result  -->
+        <div id="total-result" class="text-center "></div>
         <!-- book container -->
-        <div id="book-container" class="row">
+        <div id="book-container" class="row ">
         </div>
     </section>
     <script src="script.js"></script>
